@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneur Survey Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>NEON Collective Kitchens Entrepreneur Survey</h1>
+    <form id="entrepreneurSurvey">
+        <!-- Business Characteristics Section -->
+        <div class="section">
+            <h2 class="section-title">Business Characteristics</h2>
+            
+            <div class="form-group">
+                <label for="businessName" class="required">Business Name</label>
+                <input type="text" id="businessName" name="businessName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="market" class="required">Primary Market</label>
+                <select id="market" name="market" required>
+                    <option value="">-- Select Market --</option>
+                    <option value="local">Local</option>
+                    <option value="regional">Regional</option>
+                    <option value="national">National</option>
+                    <option value="international">International</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Employer Status</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="employerStatus" value="employer" required> Employer</label>
+                    <label><input type="radio" name="employerStatus" value="nonEmployer"> Non-employer</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="employmentSize">Employment Size (Number of Employees)</label>
+                <input type="number" id="employmentSize" name="employmentSize" min="0">
+                <div class="help-text">Enter 0 if you are a non-employer business</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="legalForm" class="required">Legal Form of Organization</label>
+                <select id="legalForm" name="legalForm" required>
+                    <option value="">-- Select Legal Form --</option>
+                    <option value="soleProprietorship">Sole Proprietorship</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="llc">Limited Liability Company (LLC)</option>
+                    <option value="corporation">Corporation</option>
+                    <option value="sCorporation">S Corporation</option>
+                    <option value="nonprofit">Nonprofit</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="revenue" class="required">Annual Revenue Size (USD)</label>
+                <select id="revenue" name="revenue" required>
+                    <option value="">-- Select Revenue Range --</option>
+                    <option value="under25k">Under $25,000</option>
+                    <option value="25kTo50k">$25,000 - $49,999</option>
+                    <option value="50kTo100k">$50,000 - $99,999</option>
+                    <option value="100kTo250k">$100,000 - $249,999</option>
+                    <option value="250kTo500k">$250,000 - $499,999</option>
+                    <option value="500kTo1m">$500,000 - $999,999</option>
+                    <option value="1mTo5m">$1,000,000 - $4,999,999</option>
+                    <option value="5mPlus">$5,000,000 or more</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="payroll">Annual Payroll (USD)</label>
+                <input type="number" id="payroll" name="payroll" min="0">
+                <div class="help-text">Enter 0 if you are a non-employer business</div>
+            </div>
+        </div>
+        
+        <!-- Owner Characteristics Section -->
+        <div class="section">
+            <h2 class="section-title">Owner Characteristics</h2>
+            
+            <div class="form-group">
+                <label for="ownerAge" class="required">Age</label>
+                <select id="ownerAge" name="ownerAge" required>
+                    <option value="">-- Select Age Range --</option>
+                    <option value="under25">Under 25</option>
+                    <option value="25to34">25-34</option>
+                    <option value="35to44">35-44</option>
+                    <option value="45to54">45-54</option>
+                    <option value="55to64">55-64</option>
+                    <option value="65plus">65 or older</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Race/Ethnicity (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="race" value="whiteNonHispanic"> White (Non-Hispanic)</label>
+                    <label><input type="checkbox" name="race" value="hispanic"> Hispanic or Latino</label>
+                    <label><input type="checkbox" name="race" value="black"> Black or African American</label>
+                    <label><input type="checkbox" name="race" value="asian"> Asian</label>
+                    <label><input type="checkbox" name="race" value="nativeAmerican"> American Indian or Alaska Native</label>
+                    <label><input type="checkbox" name="race" value="pacificIslander"> Native Hawaiian or Pacific Islander</label>
+                    <label><input type="checkbox" name="race" value="other"> Other</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">U.S. Born</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="usBorn" value="yes" required> Yes</label>
+                    <label><input type="radio" name="usBorn" value="no"> No</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" required> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="nonBinary"> Non-binary</label>
+                    <label><input type="radio" name="gender" value="preferNotToSay"> Prefer not to say</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="housing" class="required">Housing Status</label>
+                <select id="housing" name="housing" required>
+                    <option value="">-- Select Housing Status --</option>
+                    <option value="own">Own</option>
+                    <option value="rent">Rent</option>
+                    <option value="other">Other arrangement</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="householdSize" class="required">Household Size (including yourself)</label>
+                <input type="number" id="householdSize" name="householdSize" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="dependents">Number of Dependents</label>
+                <input type="number" id="dependents" name="dependents" min="0">
+            </div>
+        </div>
+        
+        <!-- Contact Information (Optional) -->
+        <div class="section">
+            <h2 class="section-title">Contact Information (Optional)</h2>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email">
+                <div class="help-text">May we contact you for follow-up research?</div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn-submit">Submit Survey</button>
+    </form>
+    
+    <script src="script.js"></script>
+</body>
+</html>
