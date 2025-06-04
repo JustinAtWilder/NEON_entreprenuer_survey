@@ -3,23 +3,40 @@ body {
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    color: #333;
+    padding: 10px;
+    color: #4f4f4f;
+    align-items: center;
 }
+.header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 5px;
+    width: 95%;
+}
+
 h1 {
     text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
+    color: #4f4f4f;
+    margin-bottom: 10px;
 }
+
+.logo {
+  resize: both;
+  width: 100px; 
+  height: 100px; 
+}
+
 .section {
     background-color: #f9f9f9;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(98, 98, 98, 0.33);
 }
 .section-title {
-    color: #2980b9;
+    color: #31a601;
     margin-top: 0;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;

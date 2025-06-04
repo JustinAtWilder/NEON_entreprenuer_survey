@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON Collective Kitchens - Logic Model</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-yellow: #b8bc29;
+            --neon-mustard: #c3d600;
+            --neon-blue: #61bdd6;
+            --neon-green: #35a50d;
+            --neon-gray: #5c6770;
+            --white: #ffffff;
+            --black: #050505;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: var(--black);
+            width: 100%;
+        }
+
+        .header {
+            position: relative;
+            text-align: center;
+            background: #ffffff;
+            color: var(--neon-gray);
+            width: auto;
+            position: sticky;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            /* Add this */
+            align-items: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+        }
+
+        .header h1 {
+            flex: 0 1 auto;
+            margin: 0 auto;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .logic-model {
+            display: flex;
+            min-height: 80vh;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .swimlane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .swimlane-header {
+            background: var(--neon-gray);
+            color: var(--white);
+            padding: 1rem 2rem 1rem 2rem;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            /* Create left negative space for overlap effect */
+            width: 100%;
+clip-path: polygon(
+    100% 50%,     /* Notch tip (middle right) */
+    96% 75%,      /* Notch lower */
+    92% 100%,     /* Bottom right after notch */
+    0 100%,       /* Bottom left */
+    4% 75%,       /* Left lower point */
+    8% 50%,       /* Left middle point */
+    4% 25%,       /* Left upper point */
+    0 0,          /* Top left */
+    92% 0,        /* Top right after notch */
+    96% 25%,      /* Notch upper */
+    100% 50%      /* Back to notch tip */
+);
+        }
+
+        .swimlane-header:hover {
+            transform: scale(1.05);
+        }
+
+        .swimlane-content {
+            background: white;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            padding: .5rem;
+            flex-grow: 1;
+            transition: all 0.3s ease;
+        }
+
+        .inputs .card {
+            border-color: var(--neon-green);
+        }
+
+        .inputs .swimlane-header {
+            background: var(--neon-green);
+            z-index: 50;
+            text-indent: 2rem;
+            width: 110%;
+            clip-path: polygon(
+                100% 50%,     /* Notch tip (middle right) */
+                96% 75%,      /* Notch lower */
+                92% 100%,     /* Bottom right after notch */
+                0 100%,       /* Bottom left */
+                4% 75%,       /* Left lower point */
+                8% 50%,       /* Left middle point */
+                4% 25%,       /* Left upper point */
+                0 0,          /* Top left */
+                92% 0,        /* Top right after notch */
+                96% 25%,      /* Notch upper */
+                100% 50%      /* Back to notch tip */
+            );
+        }
+
+        .activities .card {
+            border-color: var(--neon-blue);
+        }
+
+        .activities .swimlane-header {
+            background: var(--neon-blue);
+            z-index: 40;
+            text-indent: 1rem;
+            width: 110%;
+            clip-path: polygon(
+                100% 50%,     /* Notch tip (middle right) */
+                96% 75%,      /* Notch lower */
+                92% 100%,     /* Bottom right after notch */
+                0 100%,       /* Bottom left */
+                4% 75%,       /* Left lower point */
+                8% 50%,       /* Left middle point */
+                4% 25%,       /* Left upper point */
+                0 0,          /* Top left */
+                92% 0,        /* Top right after notch */
+                96% 25%,      /* Notch upper */
+                100% 50%      /* Back to notch tip */
+            );
+        }
+
+        .outputs .card {
+            border-color: var(--neon-mustard);
+        }
+
+        .outputs .swimlane-header {
+            background: var(--neon-mustard);
+            color: var(--white);
+            z-index: 30;
+            text-indent: 1rem;
+            width: 110%;
+            clip-path: polygon(
+                100% 50%,     /* Notch tip (middle right) */
+                96% 75%,      /* Notch lower */
+                92% 100%,     /* Bottom right after notch */
+                0 100%,       /* Bottom left */
+                4% 75%,       /* Left lower point */
+                8% 50%,       /* Left middle point */
+                4% 25%,       /* Left upper point */
+                0 0,          /* Top left */
+                92% 0,        /* Top right after notch */
+                96% 25%,      /* Notch upper */
+                100% 50%      /* Back to notch tip */
+            );
+        }
+
+        .outcomes {
+            border-color: var(--neon-gray);
+        }
+
+        .outcomes .swimlane-header {
+            background: var(--neon-gray);
+            color: var(--white);
+            z-index: 20;
+            text-indent: 1rem;
+            clip-path: polygon(
+                100% 100%,    /* Bottom right */
+                0 100%,       /* Bottom left */
+                4% 75%,       /* Left lower point */
+                8% 50%,       /* Left middle point */
+                4% 25%,       /* Left upper point */
+                0 0,          /* Top left */
+                100% 0        /* Top right */
+            );
+        }
+
+        .card {
+            background: rgba(92, 103, 112, 0.05);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid rgba(92, 103, 112, 0.05);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 1);
+        }
+
+        .card.expanded {
+            background: rgba(92, 103, 112, 0.05);
+        }
+
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #3b4849;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--neon-gray);
+        }
+
+
+        .card.expanded .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .card.expanded .card-content {
+            max-height: 500px;
+        }
+
+        .card-details {
+            padding-top: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #3b4849;
+        }
+
+        .card-details ul {
+            margin-left: 1rem;
+        }
+
+        .card-details li {
+            margin-bottom: 0.3rem;
+        }
+
+        .arrow {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 4px;
+            background: var(--neon-blue);
+            z-index: 5;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid var(--neon-blue);
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .outcome-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            color: #3b4849;
+
+        }
+
+        .outcome-level {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+
+        }
+
+        .outcome-level:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 1);
+        }
+
+        .short-term {
+            border-left: 4px solid var(--neon-gray);
+            margin-left: 1rem;
+        }
+
+        .intermediate-term {
+            border-left: 4px solid var(--neon-gray);
+            margin-left: 1rem;
+        }
+
+        .long-term {
+            border-left: 4px solid var(--neon-gray);
+            margin-left: 1rem;
+        }
+
+        .level-header {
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .short-term .level-header {
+            background: rgba(92, 103, 112, 0.05);
+        }
+
+        .intermediate-term .level-header {
+            background: rgba(92, 103, 112, 0.05);
+        }
+
+        .long-term .level-header {
+            background: rgba(92, 103, 112, 0.05);
+        }
+
+        .level-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: var(--white);
+        }
+
+        .outcome-level.expanded .level-content {
+            max-height: 800px;
+        }
+
+        .metric {
+            background: rgba(92, 103, 112, 0.05);
+            color: #3b4849;
+            padding: 0.8rem;
+            margin: 0.5rem 0 0 0.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--neon-mustard);
+        }
+
+        .metric:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 1);
+            transition: all 0.3s ease;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .arrow {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 1200px) {
+            .logic-model {
+                flex-direction: column;
+                min-width: auto;
+            }
+
+            .arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>NEON Collective Kitchens</h1>
+        <div>
+            <img src="NEON.png" alt="NEON Logo" style="width: 80px; height: auto;">
+        </div class="logo">
+    </div>
+
+    <div class="logic-model">
+        <!-- INPUTS -->
+        <div class="swimlane inputs">
+            <div class="swimlane-header" onclick="toggleSwimline(this)">
+                INPUTS
+            </div>
+            <div class="swimlane-content">
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        People
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li><strong>NEON Staff & Admin</strong></li>
+                                <li><strong>Business Development Team</strong> - 4 Staff for Commercial Kitchen Program
+                                </li>
+                                <li><strong>Entrepreneurs</strong> - Target participants</li>
+                                <li><strong>Technical Assistance Providers/SOP Consultants</strong></li>
+                                <li><strong>Collaborative Partners</strong> (4 Access, Kowalski's, Target, etc.)</li>
+                                <li><strong>Community Members & Volunteers</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        Places
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li><strong>Incubator/Commercial Kitchen</strong></li>
+                                <li><strong>NEON Building</strong> - Space & facilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        Things
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li><strong>Training Curriculums</strong></li>
+                                <li><strong>Operations Plan</strong></li>
+                                <li><strong>Required Licenses</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVITIES -->
+        <div class="swimlane activities">
+            <div class="swimlane-header" onclick="toggleSwimline(this)">
+                ACTIVITIES
+            </div>
+            <div class="swimlane-content">
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        NEON Staff Training & Support
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li>Provide ongoing training and technical assistance for entrepreneurs</li>
+                                <li>Engage in learning about incubator operations</li>
+                                <li>Conduct relationship building and networking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        Entrepreneur Development
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li><strong>Pop-up Opportunities</strong> - Create visibility for new businesses</li>
+                                <li><strong>Training Programs</strong> - Production facility training</li>
+                                <li><strong>Incubator Events</strong> - Host networking and learning events</li>
+                                <li><strong>Marketing Support</strong> - Help implement promotion strategies</li>
+                                <li><strong>Mentorship Programs</strong> - Connect with volunteers and consultants</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="toggleCard(this)">
+                    <div class="card-title">
+                        Community Engagement
+                        <span class="expand-icon">&#xFF0B</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <ul>
+                                <li><strong>Promotion & Marketing</strong> - Conduct outreach to local businesses</li>
+                                <li><strong>Supply Chain Development</strong> - Connect with local groceries</li>
+                                <li><strong>Media Outreach</strong> - Seek recognition and visibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTPUTS -->
+        <div class="swimlane outputs">
+            <div class="swimlane-header" onclick="toggleSwimline(this)">
+                OUTPUTS
+            </div>
+            <div class="swimlane-content">
+                <div class="metric"># of clients served (anticipated 270/year)</div>
+                <div class="metric"># Businesses participating in incubator</div>
+                <div class="metric">Hours of training for business owners</div>
+                <div class="metric"># Volunteer hours</div>
+                <div class="metric"># Businesses started/Member directory</div>
+                <div class="metric">% Space utilized</div>
+                <div class="metric"># Businesses expanded/growing</div>
+                <div class="metric"># Jobs created</div>
+                <div class="metric"># Media mentions</div>
+                <div class="metric"># Hours of utilization</div>
+                <div class="metric">$ Rent paid</div>
+                <div class="metric">$ Incubator revenue</div>
+                <div class="metric">$ Business revenue</div>
+                <div class="metric"># Pop-up opportunities provided</div>
+                <div class="metric"># Teaching/presentation opportunities</div>
+            </div>
+        </div>
+
+        <!-- OUTCOMES -->
+        <div class="swimlane outcomes">
+            <div class="swimlane-header" onclick="toggleSwimline(this)">
+                OUTCOMES - IMPACT
+            </div>
+            <div class="swimlane-content">
+                <div class="outcome-levels">
+                    <div class="outcome-level short-term" onclick="toggleOutcomeLevel(this)">
+                        <div class="level-header">
+                            Short Term <br> Entrepreneur Level
+                            <span class="expand-icon">&#xFF0B</span>
+                        </div>
+                        <div class="level-content">
+                            <div class="card">
+                                <div class="card-details">
+                                    <ul>
+                                        <li><strong>Low-risk lessons</strong> for new entrepreneurs</li>
+                                        <li><strong>Technical skills increase</strong> for business owners</li>
+                                        <li><strong>New marketing strategies</strong> implemented</li>
+                                        <li><strong>Increased networking</strong> and connections</li>
+                                        <li><strong>Business owners feel successful</strong></li>
+                                        <li><strong>New jobs</strong> in North Minneapolis (~260)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outcome-level intermediate-term" onclick="toggleOutcomeLevel(this)">
+                        <div class="level-header">
+                            Intermediate Term <br> Business Level
+                            <span class="expand-icon">&#xFF0B</span>
+                        </div>
+                        <div class="level-content">
+                            <div class="card">
+                                <div class="card-details">
+                                    <ul>
+                                        <li><strong>Business operations become more sustainable and scalable</strong>
+                                        </li>
+                                        <li><strong>Consistent mentorship strengthens operations</strong></li>
+                                        <li><strong>Business owners have industry knowledge</strong></li>
+                                        <li><strong>Bronze/gold/platinum business levels achieved</strong></li>
+                                        <li><strong>Businesses increase revenue</strong></li>
+                                        <li><strong>Increased awareness of the incubator</strong></li>
+                                        <li><strong>Regional recognition/acclaim</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outcome-level long-term" onclick="toggleOutcomeLevel(this)">
+                        <div class="level-header">
+                            Long Term <br> Community Level
+                            <span class="expand-icon">&#xFF0B</span>
+                        </div>
+                        <div class="level-content">
+                            <div class="card">
+                                <div class="card-details">
+                                    <ul>
+                                        <li><strong>Sustainable and profitable food businesses</strong> with lower risk
+                                            and high rewards</li>
+                                        <li><strong>Wealth creation</strong> for business owners</li>
+                                        <li><strong>Industry knowledge contribution</strong></li>
+                                        <li><strong>North Minneapolis becomes known</strong> as a neighborhood with many
+                                            locally-owned food businesses</li>
+                                        <li><strong>Food destination</strong> for the state/country</li>
+                                        <li><strong>Regional economic contribution</strong></li>
+                                        <li><strong>Increased local collaboration</strong> and additional food-related
+                                            businesses</li>
+                                        <li><strong>Community access to fresh food</strong></li>
+                                        <li><strong>Catalyzes growth</strong> for number of businesses starting in North
+                                            Minneapolis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwimline(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expand-icon');
+
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.textContent = '&#x2630';
+                header.style.background = getComputedStyle(header).backgroundColor;
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '&#x2630';
+            }
+        }
+
+        function toggleCard(card) {
+            event.stopPropagation();
+            card.classList.toggle('expanded');
+        }
+
+        function toggleOutcomeLevel(level) {
+            event.stopPropagation();
+            level.classList.toggle('expanded');
+        }
+
+        // Add some initial interactivity
+
+    </script>
+</body>
+
+</html>

@@ -1,25 +1,27 @@
-const fs = require('fs');
-const path = require('path');
+const { MongoClient } = require('mongodb');
 
-const saveResponse = (req, res) => {
-    const data = req.body;
-    const filePath = path.join(__dirname, '../responses.json'); // Adjust path to responses.json
+const uri = 'mongodb+srv://neon:KwObVHsQ0e0g8i5O@cluster0.ww6f4ap.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const client = new MongoClient(uri);
 
-    // Read the existing responses file
-    fs.readFile(filePath, 'utf8', (err, fileData) => {
-        const responses = err ? [] : JSON.parse(fileData); // Initialize as empty array if file doesn't exist
-        responses.push(data); // Add the new response
+let isConnected = false;
 
-        // Write the updated responses back to the file
-        fs.writeFile(filePath, JSON.stringify(responses, null, 2), (writeErr) => {
-            if (writeErr) {
-                console.error('Error saving response:', writeErr);
-                return res.status(500).send('Error saving response');
-            }
-            console.log('Response saved successfully');
-            res.status(200).send('Response saved');
-        });
-    });
+const saveResponse = async (req, res) => {
+    try {
+        if (!isConnected) {
+            await client.connect();
+            isConnected = true;
+        }
+        console.log('Received body:', req.body); // Add this line
+        const db = client.db('neon');
+        const collection = db.collection('survey');
+        await collection.insertOne(req.body);
+        const docs = await collection.find({}).toArray();
+        console.log('Current docs:', docs);
+        res.status(200).send('Response saved');
+    } catch (err) {
+        console.error('Error saving response:', err);
+        res.status(500).send('Error saving response');
+    }
 };
 
 module.exports = saveResponse;
