@@ -1,5 +1,5 @@
-const backendUrl = 'https://neon-entreprenuer-survey.onrender.com/api/saveResponse'; // Replace with your backend URL
-//const backendUrl = 'http://localhost:3000/api/saveResponse'; // For local development
+//const backendUrl = 'https://neon-entreprenuer-survey.onrender.com/api/saveResponse'; // Replace with your backend URL
+const backendUrl = 'http://localhost:3000/api/saveResponse'; // For local development
 
 document.getElementById('entrepreneurSurvey').addEventListener('submit', async function(e) {
     e.preventDefault();
