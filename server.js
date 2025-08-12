@@ -1,8 +1,10 @@
+
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); 
 const path = require('path');
 const saveResponse = require('./api/saveResponse');
-require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
